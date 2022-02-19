@@ -14,10 +14,15 @@ public class PlatformManager : MonoBehaviourPunCallbacks {
     [Tooltip("Choose the mode before building")]
     public Mode mode;
 
+    //Singleton to access this script from everywhere.
+    public static PlatformManager instance;
+
     void Awake() {
         if (!PhotonNetwork.IsConnected) {
             SceneManager.LoadScene(0);
         }
+        instance = this;
+
         if (mode == Mode.Screen) {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 30;
